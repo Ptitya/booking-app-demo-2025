@@ -249,7 +249,7 @@ jobs:
         run: |
           echo "Checking frontend URL..."
           HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "${{ secrets.VERCEL_FRONTEND_URL }}")
+            "https://booking-app-demo-2025-teal.vercel.app")
           
           if [ "$HTTP_STATUS" = "200" ]; then
             echo "✅ Frontend is up (HTTP $HTTP_STATUS)"

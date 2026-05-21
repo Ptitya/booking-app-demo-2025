@@ -8,7 +8,7 @@ on:
 
 env:
   NODE_VERSION: '20'
-
+ 
 jobs:
   # ─────────────────────────────────────────────
   # Job 1: Backend CI — Install, Migrate, Test
@@ -16,7 +16,7 @@ jobs:
   backend-test:
     name: Backend Tests (Newman API)
     runs-on: ubuntu-latest
-
+  
     services:
       postgres:
         image: postgres:16-alpine

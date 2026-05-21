@@ -39,8 +39,11 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // อนุญาต requests ที่ไม่มี origin (เช่น curl, Postman)
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin) return callback(null, true);
+    
+    const isVercelDomain = origin.endsWith('.vercel.app');
+    
+    if (allowedOrigins.includes(origin) || isVercelDomain) {
       callback(null, true);
     } else {
       callback(new Error(`CORS blocked: ${origin} not allowed`));
@@ -48,7 +51,7 @@ app.use(cors({
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,    // อนุญาต cookies ใน cross-origin requests
+  credentials: true,
 }));
 
 app.use(express.json());
